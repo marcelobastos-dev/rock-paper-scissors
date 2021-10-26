@@ -1,0 +1,13 @@
+<main>
+    <app-game-header></app-game-header>
+
+    <div *ngIf="showGameOptions; then tempGameOptions; else tempGameResult"></div>
+
+    <ng-template #tempGameOptions>
+        <app-game-options-list></app-game-options-list>
+    </ng-template>
+
+    <ng-template #tempGameResult>
+        <app-game-result></app-game-result>
+    </ng-template>
+</main>

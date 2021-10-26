@@ -1,0 +1,12 @@
+<div class="game-header">
+    <div class="available-game-options">
+        <span>Rock</span>
+        <span>Paper</span>
+        <span>Scissors</span>
+    </div>
+
+    <div class="game-score">
+        <span class="label">Score</span>
+        <span class="total">{{ gameControlService.score$ | async }}</span>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+<div class="game-option" [ngClass]="gameOption?.color || ''" (click)="optionClicked()">
+    <img [src]="'assets/icons/' + gameOption?.type + '.svg'" alt="Game option icon" />
+</div>

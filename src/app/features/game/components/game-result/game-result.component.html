@@ -1,0 +1,31 @@
+<div class="battle-items">
+    <div class="user-choice">
+        <app-game-option [gameOption]="gameControlService.currentUserChoice$ | async"></app-game-option>
+        <span class="label">Você</span>
+    </div>
+
+    <div class="machine-choice">
+        <app-game-option [gameOption]="gameControlService.currentMachineChoice$ | async"></app-game-option>
+        <span class="label">Máquina</span>
+    </div>
+</div>
+
+<div [ngSwitch]="gameControlService.battleResult$ | async">
+    <div *ngSwitchCase="'won'" class="won-game">
+        <span class="message">Você venceu!</span>
+
+        <button class="action" role="button" (click)="continueGame()">Jogar novamente</button>
+    </div>
+
+    <div *ngSwitchCase="'tie'" class="game-tie">
+        <span class="message">Empate!</span>
+
+        <button class="action" role="button" (click)="continueGame()">Jogar novamente</button>
+    </div>
+
+    <div *ngSwitchCase="'lost'" class="game-over">
+        <span class="message">Você perdeu :(</span>
+        <span class="score">Sua pontuação foi: {{ gameControlService.score$ | async }}</span>
+        <button class="action" role="button" (click)="resetGame()">Reiniciar</button>
+    </div>
+</div>

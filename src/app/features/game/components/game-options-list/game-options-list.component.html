@@ -1,0 +1,7 @@
+<div class="game-options-list">
+    <app-game-option
+        *ngFor="let option of options"
+        [gameOption]="option"
+        (clicked)="setUserChoice($event)"
+    ></app-game-option>
+</div>
