@@ -11,12 +11,7 @@ export class GameResultComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    continueGame() {
-        this.gameControlService.setBattleResult(null)
-    }
-
     resetGame() {
-        this.gameControlService.setScore(0)
-        this.continueGame()
+        this.gameControlService.resetGame()
     }
 }

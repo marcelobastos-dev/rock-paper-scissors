@@ -1,0 +1,50 @@
+.game-hands {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 15rem;
+    margin: 6rem auto 5rem;
+}
+
+.user-hand,
+.machine-hand {
+    &.shake {
+        animation: shakeHand 2s;
+    }
+}
+
+.machine-hand {
+    img {
+        transform: scaleX(-1);
+    }
+}
+
+@keyframes shakeHand {
+    0% {
+        transform: translateY(0px);
+    }
+    15% {
+        transform: translateY(-50px);
+    }
+    25% {
+        transform: translateY(0px);
+    }
+    35% {
+        transform: translateY(-50px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    65% {
+        transform: translateY(-50px);
+    }
+    75% {
+        transform: translateY(0px);
+    }
+    85% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

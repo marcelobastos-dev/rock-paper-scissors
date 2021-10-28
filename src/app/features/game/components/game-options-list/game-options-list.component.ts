@@ -10,13 +10,19 @@ import { GameControlService } from '../../services/game-control.service'
 export class GameOptionsListComponent implements OnInit {
     options = <GameOption[]>[]
 
-    constructor(private gameControlService: GameControlService) {}
+    constructor(public gameControlService: GameControlService) {}
 
     ngOnInit(): void {
         this.options = this.gameControlService.gameOptions
     }
 
     setUserChoice(gameOption: GameOption) {
-        this.gameControlService.setCurrentUserChoice(gameOption)
+        this.gameControlService.resetHands()
+        this.gameControlService.setResolvingGame(true)
+
+        setTimeout(() => {
+            this.gameControlService.setCurrentUserChoice(gameOption)
+            this.gameControlService.resolveGame()
+        }, 2000)
     }
 }

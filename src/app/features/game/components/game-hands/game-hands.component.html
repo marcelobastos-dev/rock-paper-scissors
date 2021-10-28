@@ -1,0 +1,9 @@
+<div class="game-hands">
+    <div class="user-hand" [ngClass]="{ shake: isResolvingGame }">
+        <img [src]="'assets/icons/' + userHandIcon + '-hand.svg'" alt="User hand icon" />
+    </div>
+
+    <div class="machine-hand" [ngClass]="{ shake: isResolvingGame }">
+        <img [src]="'assets/icons/' + machineHandIcon + '-hand.svg'" alt="Machine hand icon" />
+    </div>
+</div>

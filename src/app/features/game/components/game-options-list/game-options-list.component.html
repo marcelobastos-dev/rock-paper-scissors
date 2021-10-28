@@ -2,6 +2,7 @@
     <app-game-option
         *ngFor="let option of options"
         [gameOption]="option"
+        [isDisabled]="(gameControlService.resolvingGame$ | async) || false"
         (clicked)="setUserChoice($event)"
     ></app-game-option>
 </div>

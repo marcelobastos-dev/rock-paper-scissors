@@ -8,6 +8,7 @@ import { GameOption } from '../../models/game-option.model'
 })
 export class GameOptionComponent implements OnInit {
     @Input() gameOption: GameOption | null = <GameOption>{}
+    @Input() isDisabled: boolean = false
 
     @Output() clicked = new EventEmitter()
 

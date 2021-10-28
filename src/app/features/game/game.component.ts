@@ -18,8 +18,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.subscription.add(
             this.gameControlService.battleResult$.subscribe({
                 next: (res) => {
-                    console.log(res)
-                    this.showGameOptions = res == null
+                    this.showGameOptions = res !== 'lost'
                 },
             })
         )

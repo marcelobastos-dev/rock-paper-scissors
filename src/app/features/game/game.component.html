@@ -1,6 +1,8 @@
 <main>
     <app-game-header></app-game-header>
 
+    <app-game-hands></app-game-hands>
+
     <div *ngIf="showGameOptions; then tempGameOptions; else tempGameResult"></div>
 
     <ng-template #tempGameOptions>

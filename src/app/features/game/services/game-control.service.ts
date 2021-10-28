@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { EventEmitter, Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { BattleResult } from '../models/battle-result.model'
 import { GameOption } from '../models/game-option.model'
@@ -37,6 +37,10 @@ export class GameControlService {
     private readonly _currentMachineChoice = new BehaviorSubject<GameOption>(<GameOption>{})
     readonly currentMachineChoice$ = this._currentMachineChoice.asObservable()
 
+    // Battle state
+    private readonly _resolvingGame = new BehaviorSubject<boolean>(false)
+    readonly resolvingGame$ = this._resolvingGame.asObservable()
+
     // Battle result
     private readonly _battleResult = new BehaviorSubject<BattleResult>(null)
     readonly battleResult$ = this._battleResult.asObservable()
@@ -67,7 +71,6 @@ export class GameControlService {
 
     private set currentUserChoice(gameOption: GameOption) {
         this._currentUserChoice.next(gameOption)
-        this.resolveGame()
     }
 
     // Machine choice
@@ -81,6 +84,15 @@ export class GameControlService {
 
     private set currentMachineChoice(gameOption: GameOption) {
         this._currentMachineChoice.next(gameOption)
+    }
+
+    // Battle state
+    setResolvingGame(isResolving: boolean) {
+        this.resolvingGame = isResolving
+    }
+
+    private set resolvingGame(isResolving: boolean) {
+        this._resolvingGame.next(isResolving)
     }
 
     // Battle result
@@ -97,27 +109,39 @@ export class GameControlService {
     }
 
     // Resolve game
-    private resolveGame() {
+    resolveGame() {
+        this.setCurrentMachineChoice(this.getRandomMachineChoice())
         const currentUserChoice = this.getCurrentUserChoice()
-        const machineChoice = this.getRandomMachineChoice()
+        const currentMachineChoice = this.getCurrentMachineChoice()
 
         let battleResult: BattleResult = null
-        if (currentUserChoice.type === machineChoice.type) {
+        if (currentUserChoice.type === currentMachineChoice.type) {
             battleResult = 'tie'
-        } else if (currentUserChoice.wins.indexOf(machineChoice.type) > -1) {
+        } else if (currentUserChoice.wins.indexOf(currentMachineChoice.type) > -1) {
             battleResult = 'won'
             this.setScore(this.getScore() + 1)
         } else {
             battleResult = 'lost'
         }
 
-        this.setCurrentMachineChoice(machineChoice)
-
+        this.setResolvingGame(false)
         this.battleResult = battleResult
     }
 
     private getRandomMachineChoice(): GameOption {
         const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
         return this.gameOptions[randomInt(0, this.gameOptions.length - 1)]
+    }
+
+    // Game state
+    resetHands() {
+        this.setBattleResult(null)
+        this.setCurrentUserChoice(<GameOption>{})
+        this.setCurrentMachineChoice(<GameOption>{})
+    }
+
+    resetGame() {
+        this.resetHands()
+        this.setScore(0)
     }
 }

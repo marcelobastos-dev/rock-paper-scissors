@@ -1,0 +1,29 @@
+@mixin for-small-devices {
+    @media (min-width: 576px) {
+        @content;
+    }
+}
+
+@mixin for-medium-devices {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin for-large-devices {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin for-2x-large-devices {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin for-3x-large-devices {
+    @media (min-width: 1400px) {
+        @content;
+    }
+}

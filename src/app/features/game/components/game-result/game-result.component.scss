@@ -1,26 +1,5 @@
 @import 'core';
 
-.battle-items {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
-
-    .user-choice,
-    .machine-choice {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .label {
-            margin-top: 1rem;
-            text-transform: uppercase;
-        }
-    }
-}
-
-.won-game,
-.game-tie,
 .game-over {
     display: flex;
     flex-direction: column;
@@ -28,7 +7,6 @@
     justify-content: flex-start;
 
     .message {
-        margin-top: 4rem;
         text-transform: uppercase;
         font-size: 1.5rem;
         font-weight: 700;
